@@ -1,12 +1,25 @@
+import java.util.UUID;
+
 public class Player {
-    private Frame last;
+    private String playerName;
+    private IUIDrawer uiDrawer;
+    private IFrameDecoder frameDecoder;
+    private IFrameCache frameCache;
+
+    public Player(IUIDrawer uiDrawer, IFrameDecoder frameDecoder, IFrameCache frameCache) {
+        this.uiDrawer = uiDrawer;
+        this.frameDecoder = frameDecoder;
+        this.frameCache = frameCache;
+        this.playerName = UUID.randomUUID().toString();
+    }
+
     void play(byte[] fileBytes){
         // decode
-        Frame f = new Frame(fileBytes); // pretend decoding
-        last = f;
+        Frame f = frameDecoder.decodeFrame(fileBytes);
+        frameCache.cacheFrame(f);
         // draw UI
-        System.out.println("\u25B6 Playing " + fileBytes.length + " bytes");
+        uiDrawer.draw(playerName,fileBytes.length);
         // cache
-        System.out.println("Cached last frame? " + (last!=null));
+        frameCache.checkLastFrame();
     }
 }
