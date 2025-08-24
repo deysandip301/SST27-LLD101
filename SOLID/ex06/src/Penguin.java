@@ -1,5 +1,6 @@
 public class Penguin extends Bird {
-    @Override void fly(){
-         throw new UnsupportedOperationException("Can't fly"); 
+    public void flapWings() {
+        // Implementation for flapping wings
+        System.out.println("Penguin flapping wings");
     }
 }
