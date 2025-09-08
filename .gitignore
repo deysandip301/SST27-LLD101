@@ -19,3 +19,4 @@ build/
 out/
 
 *.csv
+*.log
